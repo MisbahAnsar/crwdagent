@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Compass, PanelLeftClose, PanelLeftOpen, User } from "lucide-react";
+import { AppSidebar } from "@/components/blocks/whatsapp-sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/blocks/sidebar";
 import AgentRunModal from "../../components/AgentRunModal";
 import { AGENTS, getAgentById, type Agent } from "../../lib/agents";
 
@@ -29,10 +30,6 @@ type RunState =
   | { status: "error"; message: string };
 
 type NavKey = "my" | "explore";
-
-function navLabel(key: NavKey) {
-  return key === "my" ? "My Agents" : "Explore Agents";
-}
 
 function getUsage(agent: Agent) {
   switch (agent.id) {
@@ -70,7 +67,6 @@ function getUsage(agent: Agent) {
 }
 
 export default function DashboardPage() {
-  const [navOpen, setNavOpen] = useState(true);
   const [active, setActive] = useState<NavKey>("my");
 
   const [addedIds, setAddedIds] = useState<string[]>(() => {
@@ -122,9 +118,6 @@ export default function DashboardPage() {
     setActiveAgentId(null);
   }
 
-  const sidebarWidth = navOpen ? "w-64" : "w-16";
-  const mainOffset = navOpen ? "md:pl-72" : "md:pl-24";
-
   return (
     <div className="relative min-h-screen overflow-hidden bg-zinc-950 text-zinc-50">
       <div className="pointer-events-none absolute inset-0 opacity-60">
@@ -132,79 +125,10 @@ export default function DashboardPage() {
         <div className="absolute -right-24 top-24 h-[34rem] w-[34rem] rounded-full bg-cyan-400/18 blur-3xl" />
       </div>
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:radial-gradient(circle_at_1px_1px,theme(colors.zinc.50)_1px,transparent_0)] [background-size:18px_18px]" />
-
-      <aside
-        className={[
-          "hidden md:block fixed inset-y-0 left-0 z-20 border-r border-white/10 bg-white/[0.04] shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-[width] duration-500 ease-in-out will-change-[width]",
-          sidebarWidth,
-        ].join(" ")}
-      >
-        <div className="h-full overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-4">
-            <div className={navOpen ? "block" : "hidden"}>
-              <div className="text-xs font-semibold tracking-[0.22em] text-zinc-300/90">
-                CRWDAGENT
-              </div>
-              <div className="mt-1 text-sm font-semibold text-zinc-50">
-                Dashboard
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={() => setNavOpen((v) => !v)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-zinc-200 transition-colors hover:bg-white/10"
-              aria-label={navOpen ? "Collapse sidebar" : "Expand sidebar"}
-            >
-              {navOpen ? (
-                <PanelLeftClose className="h-5 w-5" aria-hidden="true" />
-              ) : (
-                <PanelLeftOpen className="h-5 w-5" aria-hidden="true" />
-              )}
-            </button>
-          </div>
-
-          <nav className="px-4 pb-4">
-            {(["my", "explore"] as NavKey[]).map((key) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setActive(key)}
-                className={[
-                  "flex w-full items-center rounded-2xl py-3 text-sm",
-                  navOpen ? "gap-3 px-3 justify-start" : "px-0 justify-center",
-                  active === key
-                    ? "bg-white/10 text-zinc-50"
-                    : "text-zinc-300",
-                ].join(" ")}
-              >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/5 text-zinc-200">
-                  {key === "my" ? (
-                    <User className="h-5 w-5" aria-hidden="true" />
-                  ) : (
-                    <Compass className="h-5 w-5" aria-hidden="true" />
-                  )}
-                </span>
-                <span
-                  className={[
-                    "truncate font-medium transition-all duration-500 ease-in-out",
-                    navOpen ? "opacity-100 translate-x-0" : "hidden",
-                  ].join(" ")}
-                >
-                  {navLabel(key)}
-                </span>
-              </button>
-            ))}
-          </nav>
-        </div>
-      </aside>
-
-      <div
-        className={[
-          "relative w-full px-4 py-6 sm:px-6 sm:py-10 transition-[padding] duration-500 ease-in-out",
-          mainOffset,
-        ].join(" ")}
-      >
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+      <SidebarProvider>
+        <AppSidebar active={active} onActiveChange={setActive} />
+        <SidebarInset className="relative px-4 py-6 sm:px-6 sm:py-10">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
           <header className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <div className="text-sm font-semibold tracking-[0.22em] text-zinc-200/90 md:hidden">
@@ -409,8 +333,9 @@ export default function DashboardPage() {
               })}
             </div>
           )}
-        </div>
-      </div>
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
 
       <AgentRunModal
         open={modalOpen}
