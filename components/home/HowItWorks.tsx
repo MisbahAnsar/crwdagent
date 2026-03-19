@@ -5,7 +5,7 @@ export default function HowItWorks() {
         <h2 className="text-pretty text-2xl font-semibold tracking-tight sm:text-3xl">
           How it works
         </h2>
-        <p className="mt-3 text-sm leading-6 text-zinc-300/90 sm:text-base">
+        <p className="mt-3 text-sm leading-6 text-zinc-600 sm:text-base">
           From discovery to results in minutes.
         </p>
       </div>
@@ -30,15 +30,15 @@ export default function HowItWorks() {
         ].map((s) => (
           <div
             key={s.title}
-            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm"
+            className="relative overflow-hidden rounded-3xl border border-black/10 bg-white p-6 shadow-sm"
           >
-            <div className="text-xs font-semibold tracking-[0.18em] text-zinc-400">
+            <div className="text-xs font-semibold tracking-[0.18em] text-zinc-500">
               {s.step}
             </div>
             <div className="mt-2 text-lg font-semibold tracking-tight">
               {s.title}
             </div>
-            <div className="mt-2 text-sm leading-6 text-zinc-300/90">
+            <div className="mt-2 text-sm leading-6 text-zinc-600">
               {s.body}
             </div>
           </div>

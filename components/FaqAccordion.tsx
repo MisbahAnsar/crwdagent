@@ -30,7 +30,7 @@ export default function FaqAccordion({ items }: Props) {
           return (
             <div
               key={item.question}
-              className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.06]"
+              className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm transition-colors hover:border-black/15 hover:bg-zinc-50"
             >
               <button
                 id={buttonId}
@@ -40,13 +40,13 @@ export default function FaqAccordion({ items }: Props) {
                 onClick={() => setOpenIndex((cur) => (cur === idx ? null : idx))}
                 className="flex w-full items-center justify-between gap-6 px-5 py-4 text-left"
               >
-                <span className="text-sm font-semibold tracking-tight text-zinc-50 sm:text-base">
+                <span className="text-sm font-semibold tracking-tight text-zinc-900 sm:text-base">
                   {item.question}
                 </span>
                 <span
                   aria-hidden="true"
                   className={[
-                    "grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-white/5 text-zinc-200 transition",
+                    "grid h-8 w-8 place-items-center rounded-full border border-black/10 bg-zinc-50 text-zinc-800 transition",
                     isOpen ? "rotate-45" : "rotate-0",
                   ].join(" ")}
                 >
@@ -64,7 +64,7 @@ export default function FaqAccordion({ items }: Props) {
                 ].join(" ")}
               >
                 <div className="min-h-0 overflow-hidden">
-                  <div className="px-5 pb-5 text-sm leading-6 text-zinc-300/90">
+                  <div className="px-5 pb-5 text-sm leading-6 text-zinc-600">
                     {item.answer}
                   </div>
                 </div>

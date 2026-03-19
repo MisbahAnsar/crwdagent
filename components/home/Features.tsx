@@ -44,7 +44,7 @@ export default function Features() {
         <h2 className="text-pretty text-2xl font-semibold tracking-tight sm:text-3xl">
           Everything you need to run—and sell—agents
         </h2>
-        <p className="mt-3 text-sm leading-6 text-zinc-300/90 sm:text-base">
+        <p className="mt-3 text-sm leading-6 text-zinc-600 sm:text-base">
           A clean marketplace experience for users, and a simple monetization
           layer for creators.
         </p>
@@ -54,9 +54,9 @@ export default function Features() {
         {FEATURES.map((f) => (
           <div
             key={f.title}
-            className="group flex h-[18rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-4 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.06]"
+            className="group flex h-[18rem] flex-col overflow-hidden rounded-3xl border border-black/10 bg-white p-4 shadow-sm transition-colors hover:border-black/15 hover:bg-zinc-50"
           >
-            <div className="relative flex-[7] overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/30">
+            <div className="relative flex-[7] overflow-hidden rounded-2xl border border-black/10 bg-zinc-50">
               <div
                 className={[
                   "pointer-events-none absolute inset-0 bg-gradient-to-br opacity-100 transition-opacity group-hover:opacity-90",
@@ -64,20 +64,20 @@ export default function Features() {
                 ].join(" ")}
               />
 
-              <div className="absolute left-3 top-3 rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
+              <div className="absolute left-3 top-3 rounded-full border border-black/10 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-800 shadow-sm">
                 {f.badge}
               </div>
 
               {f.variant === "run" ? (
                 <div className="absolute inset-x-3 bottom-3 space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="text-[11px] font-semibold tracking-[0.14em] text-zinc-200/70">
+                    <div className="text-[11px] font-semibold tracking-[0.14em] text-zinc-600">
                       EXECUTION
                     </div>
-                    <div className="flex items-center gap-2 text-[11px] text-zinc-300/75">
+                    <div className="flex items-center gap-2 text-[11px] text-zinc-600">
                       <span className="relative inline-flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300/50" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-200" />
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400/35" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
                       </span>
                       live
                     </div>
@@ -85,12 +85,12 @@ export default function Features() {
                   <div className="space-y-2">
                     {["Queued", "Running", "Done"].map((label, i) => (
                       <div key={label} className="flex items-center gap-3">
-                        <div className="w-14 text-[11px] text-zinc-400">
+                        <div className="w-14 text-[11px] text-zinc-500">
                           {label}
                         </div>
-                        <div className="h-2 flex-1 overflow-hidden rounded-full border border-white/10 bg-white/5">
+                        <div className="h-2 flex-1 overflow-hidden rounded-full border border-black/10 bg-white">
                           <div
-                            className="h-full rounded-full bg-cyan-200/60 animate-pulse"
+                            className="h-full rounded-full bg-cyan-500/50 animate-pulse"
                             style={{
                               width:
                                 i === 0 ? "45%" : i === 1 ? "70%" : "100%",
@@ -112,10 +112,10 @@ export default function Features() {
                     ].map((m) => (
                       <div
                         key={m.k}
-                        className="rounded-2xl border border-white/10 bg-white/5 px-2.5 py-2.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]"
+                        className="rounded-2xl border border-black/10 bg-white px-2.5 py-2.5 shadow-sm"
                       >
-                        <div className="text-[11px] text-zinc-400">{m.k}</div>
-                        <div className="mt-1 text-sm font-semibold tabular-nums text-zinc-50">
+                        <div className="text-[11px] text-zinc-500">{m.k}</div>
+                        <div className="mt-1 text-sm font-semibold tabular-nums text-zinc-900">
                           {m.v}
                         </div>
                       </div>
@@ -125,10 +125,10 @@ export default function Features() {
               ) : f.variant === "payouts" ? (
                 <div className="absolute inset-x-3 bottom-3 space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="text-[11px] font-semibold tracking-[0.14em] text-zinc-200/70">
+                    <div className="text-[11px] font-semibold tracking-[0.14em] text-zinc-600">
                       PAYOUTS
                     </div>
-                    <div className="rounded-full bg-zinc-50 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-zinc-950 shadow-[0_0_0_1px_rgba(255,255,255,0.22)]">
+                    <div className="rounded-full bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-white shadow-sm">
                       $2,418
                     </div>
                   </div>
@@ -139,12 +139,12 @@ export default function Features() {
                       { label: "Baseline", w: 44 },
                     ].map((row, idx) => (
                       <div key={row.label} className="flex items-center gap-3">
-                        <div className="w-20 text-[11px] text-zinc-400">
+                        <div className="w-20 text-[11px] text-zinc-500">
                           {row.label}
                         </div>
-                        <div className="h-2 flex-1 overflow-hidden rounded-full border border-white/10 bg-white/5">
+                        <div className="h-2 flex-1 overflow-hidden rounded-full border border-black/10 bg-white">
                           <div
-                            className="h-full rounded-full bg-fuchsia-200/60 animate-pulse"
+                            className="h-full rounded-full bg-fuchsia-500/40 animate-pulse"
                             style={{
                               width: `${row.w}%`,
                               animationDelay: `${idx * 120}ms`,
@@ -157,10 +157,10 @@ export default function Features() {
                 </div>
               ) : (
                 <div className="absolute inset-x-3 bottom-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]">
+                  <div className="rounded-2xl border border-black/10 bg-white p-3 shadow-sm">
                     <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 animate-pulse rounded-full bg-zinc-100/80" />
-                      <div className="text-xs font-semibold text-zinc-200/90">
+                      <div className="h-2 w-2 animate-pulse rounded-full bg-zinc-900/60" />
+                      <div className="text-xs font-semibold text-zinc-700">
                         Drag, drop, run
                       </div>
                     </div>
@@ -168,14 +168,14 @@ export default function Features() {
                       {["Prompt", "Inputs", "Output"].map((t) => (
                         <div
                           key={t}
-                          className="rounded-xl border border-white/10 bg-zinc-950/30 px-2.5 py-1.5 text-[11px] text-zinc-300/90"
+                          className="rounded-xl border border-black/10 bg-zinc-50 px-2.5 py-1.5 text-[11px] text-zinc-600"
                         >
                           {t}
                         </div>
                       ))}
                     </div>
-                    <div className="mt-3 h-2 overflow-hidden rounded-full border border-white/10 bg-white/5">
-                      <div className="h-full w-[60%] rounded-full bg-zinc-100/55 animate-pulse" />
+                    <div className="mt-3 h-2 overflow-hidden rounded-full border border-black/10 bg-zinc-50">
+                      <div className="h-full w-[60%] rounded-full bg-zinc-900/25 animate-pulse" />
                     </div>
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function Features() {
               <div className="text-sm font-semibold tracking-tight">
                 {f.title}
               </div>
-              <div className="mt-2 text-sm leading-6 text-zinc-300/90">
+              <div className="mt-2 text-sm leading-6 text-zinc-600">
                 {f.body}
               </div>
             </div>

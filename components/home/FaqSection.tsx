@@ -7,7 +7,7 @@ export default function FaqSection() {
         <h2 className="text-pretty text-2xl font-semibold tracking-tight sm:text-3xl">
           FAQ
         </h2>
-        <p className="mt-3 text-sm leading-6 text-zinc-300/90 sm:text-base">
+        <p className="mt-3 text-sm leading-6 text-zinc-600 sm:text-base">
           Quick answers about CRWDAGENT, pricing, and publishing.
         </p>
       </div>

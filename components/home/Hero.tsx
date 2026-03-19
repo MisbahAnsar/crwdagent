@@ -1,85 +1,68 @@
 export default function Hero() {
   return (
-    <section className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
-      <div className="lg:col-span-7">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-zinc-200">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-lime-200" />
-          Marketplace-ready agents • pay-per-use • creator payouts
+    <section className="relative z-10 w-full min-h-[90vh] overflow-hidden bg-[#f4f7ff] pb-40 pt-32 flex items-center justify-center">
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, #000 1.5px, transparent 1.5px)",
+          backgroundSize: "16px 16px",
+        }}
+      />
+
+      <div className="relative flex flex-col items-center text-center z-10 px-6 max-w-4xl mx-auto -mt-10">
+        <div className="w-20 h-20 bg-black rounded-[24px] shadow-xl flex items-center justify-center mb-8 transform rotate-4">
+          <div className="grid grid-cols-2 gap-2 w-10 h-10">
+            <div className="w-full h-full bg-white rounded-full border border-gray-200" />
+            <div className="w-full h-full bg-red-500 rounded-full" />
+            <div className="w-full h-full bg-red-500 rounded-full" />
+            <div className="w-full h-full bg-white rounded-full border border-gray-200" />
+          </div>
         </div>
 
-        <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-          Monetize AI Agents Instantly
+        <h1
+          className="text-4xl sm:text-6xl md:text-[72px] tracking-tight leading-[1.05]"
+          style={{
+            fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+            fontWeight: 600,
+            color: "lab(8.11897 0.811279 -12.254)",
+          }}
+        >
+          Monetize{" "}
+          <span
+            style={{
+              fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+              fontWeight: 300,
+              color: "lab(65.9269 -0.832707 -8.17473)",
+            }}
+          >
+            AI Agents
+          </span>
+          <br />
+          Instantly
         </h1>
 
-        <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-300/90 sm:text-lg">
-          Use powerful agents on demand—and earn by publishing your own.
-          CRWDAGENT makes it simple to run, share, and monetize AI workflows
-          with pay‑per‑use pricing.
+        <p
+          className="mt-6 max-w-xl mx-auto"
+          style={{
+            fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+            fontSize: 17,
+            fontWeight: 300,
+            lineHeight: "27.625px",
+            color: "lab(35.6337 -1.58697 -10.8425)",
+          }}
+        >
+          Run pay-per-use agents in seconds, then publish your own to earn from
+          every execution-without any setup.
         </p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mt-10">
           <a
+            className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-lg shadow-blue-500/20 transition-all hover:shadow-blue-500/40 text-[15px]"
             href="/dashboard"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-zinc-50 px-5 text-sm font-semibold text-zinc-950 shadow-[0_0_0_1px_rgba(255,255,255,0.25)] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           >
-            Explore Agents
+            Get free demo
           </a>
-          <div className="text-sm text-zinc-400">
-            No-code friendly • Usage-based • Built for teams & creators
-          </div>
-        </div>
-      </div>
-
-      <div className="lg:col-span-5">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm">
-          <div className="pointer-events-none absolute inset-0 opacity-70">
-            <div className="absolute -right-20 -top-16 h-64 w-64 rounded-full bg-cyan-300/10 blur-3xl" />
-            <div className="absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-fuchsia-400/10 blur-3xl" />
-          </div>
-          <div className="relative space-y-4">
-            <div className="text-xs font-semibold tracking-[0.18em] text-zinc-300/90">
-              LIVE PREVIEW
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <div>
-                  <div className="text-sm font-semibold text-zinc-50">
-                    Run agent
-                  </div>
-                  <div className="text-xs text-zinc-400">
-                    get results in seconds
-                  </div>
-                </div>
-                <div className="rounded-full bg-zinc-50 px-3 py-1 text-xs font-semibold text-zinc-950">
-                  /run
-                </div>
-              </div>
-              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <div>
-                  <div className="text-sm font-semibold text-zinc-50">
-                    Pay per use
-                  </div>
-                  <div className="text-xs text-zinc-400">priced by value</div>
-                </div>
-                <div className="text-sm font-semibold tabular-nums text-zinc-50">
-                  $0.09
-                  <span className="text-zinc-300/90">/credit</span>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <div className="text-sm font-semibold text-zinc-50">
-                  Creator monetization
-                </div>
-                <div className="mt-1 text-xs leading-5 text-zinc-400">
-                  Publish an agent, set pricing, and get paid as users run your
-                  workflow.
-                </div>
-              </div>
-            </div>
-            <div className="text-xs text-zinc-500">
-              Designed for high-trust, low-friction adoption.
-            </div>
-          </div>
         </div>
       </div>
     </section>

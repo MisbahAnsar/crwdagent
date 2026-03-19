@@ -119,25 +119,25 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-zinc-950 text-zinc-50">
-      <div className="pointer-events-none absolute inset-0 opacity-60">
-        <div className="absolute -left-24 -top-28 h-[32rem] w-[32rem] rounded-full bg-fuchsia-500/20 blur-3xl" />
-        <div className="absolute -right-24 top-24 h-[34rem] w-[34rem] rounded-full bg-cyan-400/18 blur-3xl" />
+    <div className="relative min-h-screen overflow-hidden bg-zinc-50 text-zinc-950">
+      <div className="pointer-events-none absolute inset-0 opacity-70">
+        <div className="absolute -left-24 -top-28 h-[32rem] w-[32rem] rounded-full bg-fuchsia-400/20 blur-3xl" />
+        <div className="absolute -right-24 top-24 h-[34rem] w-[34rem] rounded-full bg-cyan-300/25 blur-3xl" />
       </div>
-      <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:radial-gradient(circle_at_1px_1px,theme(colors.zinc.50)_1px,transparent_0)] [background-size:18px_18px]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,theme(colors.zinc.950)_1px,transparent_0)] [background-size:18px_18px]" />
       <SidebarProvider>
         <AppSidebar active={active} onActiveChange={setActive} />
         <SidebarInset className="relative px-4 py-6 sm:px-6 sm:py-10">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
           <header className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <div className="text-sm font-semibold tracking-[0.22em] text-zinc-200/90 md:hidden">
+              <div className="text-sm font-semibold tracking-[0.22em] text-zinc-700 md:hidden">
                 CRWDAGENT
               </div>
               <h1 className="mt-1 text-balance text-2xl font-semibold tracking-tight sm:text-4xl">
                 {active === "my" ? "My Agents" : "Explore Agents"}
               </h1>
-              <p className="mt-2 text-sm leading-6 text-zinc-300/90">
+              <p className="mt-2 text-sm leading-6 text-zinc-600">
                 {active === "my"
                   ? "Run agents you own and manage your collection."
                   : "Browse available agents and add them to your dashboard."}
@@ -147,15 +147,15 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="hidden rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-zinc-200 transition-colors hover:bg-white/10 sm:inline-flex"
+                className="hidden rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 shadow-sm transition-colors hover:bg-zinc-50 sm:inline-flex"
                 disabled
                 title="Coming soon"
               >
                 Create Agent (Coming soon)
               </button>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-zinc-300">
+              <div className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-600 shadow-sm">
                 <span
-                  className="font-semibold text-zinc-50"
+                  className="font-semibold text-zinc-900"
                   suppressHydrationWarning
                 >
                   {addedIds.length}
@@ -172,28 +172,28 @@ export default function DashboardPage() {
                 return (
                   <article
                     key={agent.id}
-                    className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.06]"
+                    className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white p-6 shadow-sm transition-colors hover:border-black/15 hover:bg-zinc-50"
                   >
                     <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-fuchsia-400/10 blur-3xl" />
-                      <div className="absolute -right-20 top-10 h-64 w-64 rounded-full bg-cyan-300/10 blur-3xl" />
+                      <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-fuchsia-400/15 blur-3xl" />
+                      <div className="absolute -right-20 top-10 h-64 w-64 rounded-full bg-cyan-300/18 blur-3xl" />
                     </div>
 
                     <div className="relative flex h-full min-h-56 flex-col">
                       <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
-                          <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-50">
+                          <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
                             {agent.name}
                           </h2>
-                          <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-200/90">
+                          <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-600">
                             {agent.description}
                           </p>
                         </div>
-                        <div className="shrink-0 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-right">
-                          <div className="text-sm font-semibold tabular-nums text-zinc-50">
+                        <div className="shrink-0 rounded-2xl border border-black/10 bg-zinc-50 px-3 py-2 text-right">
+                          <div className="text-sm font-semibold tabular-nums text-zinc-900">
                             {agent.price}
                           </div>
-                          <div className="mt-0.5 text-[11px] text-zinc-400">
+                          <div className="mt-0.5 text-[11px] text-zinc-500">
                             pay‑per‑use
                           </div>
                         </div>
@@ -204,7 +204,7 @@ export default function DashboardPage() {
                           type="button"
                           onClick={() => addAgent(agent)}
                           disabled={isAdded}
-                          className="inline-flex w-full items-center justify-center rounded-2xl bg-zinc-50 px-4 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_0_1px_rgba(255,255,255,0.25)] transition-colors hover:bg-white disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-zinc-200 disabled:shadow-[0_0_0_1px_rgba(255,255,255,0.12)]"
+                          className="inline-flex w-full items-center justify-center rounded-2xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-zinc-500"
                         >
                           {isAdded ? "Added" : "Add Agent"}
                         </button>
@@ -218,17 +218,17 @@ export default function DashboardPage() {
               })}
             </div>
           ) : ownedAgents.length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-10 text-center shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm">
+            <div className="rounded-3xl border border-black/10 bg-white p-10 text-center shadow-sm">
               <div className="text-lg font-semibold tracking-tight">
                 No agents added yet
               </div>
-              <div className="mt-2 text-sm leading-6 text-zinc-300/90">
+              <div className="mt-2 text-sm leading-6 text-zinc-600">
                 Switch to Explore Agents and add one to get started.
               </div>
               <button
                 type="button"
                 onClick={() => setActive("explore")}
-                className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-zinc-50 px-6 text-sm font-semibold text-zinc-950 shadow-[0_0_0_1px_rgba(255,255,255,0.25)] transition-colors hover:bg-white"
+                className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-zinc-900 px-6 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800"
               >
                 Explore Agents
               </button>
@@ -241,42 +241,42 @@ export default function DashboardPage() {
                 return (
                   <article
                     key={agent.id}
-                    className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.06]"
+                    className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white p-6 shadow-sm transition-colors hover:border-black/15 hover:bg-zinc-50"
                   >
                     <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-fuchsia-400/10 blur-3xl" />
-                      <div className="absolute -right-20 top-10 h-64 w-64 rounded-full bg-cyan-300/10 blur-3xl" />
+                      <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-fuchsia-400/15 blur-3xl" />
+                      <div className="absolute -right-20 top-10 h-64 w-64 rounded-full bg-cyan-300/18 blur-3xl" />
                     </div>
 
                     <div className="relative flex h-full min-h-72 flex-col">
                       <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
-                          <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-50">
+                          <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
                             {agent.name}
                           </h2>
-                          <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-200/90">
+                          <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-600">
                             {agent.description}
                           </p>
                         </div>
-                        <div className="shrink-0 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-right">
-                          <div className="text-sm font-semibold tabular-nums text-zinc-50">
+                        <div className="shrink-0 rounded-2xl border border-black/10 bg-zinc-50 px-3 py-2 text-right">
+                          <div className="text-sm font-semibold tabular-nums text-zinc-900">
                             {agent.price}
                           </div>
-                          <div className="mt-0.5 text-[11px] text-zinc-400">
+                          <div className="mt-0.5 text-[11px] text-zinc-500">
                             pay‑per‑use
                           </div>
                         </div>
                       </div>
 
-                      <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]">
-                        <div className="text-xs font-semibold tracking-[0.14em] text-zinc-400">
+                      <div className="mt-5 rounded-2xl border border-black/10 bg-zinc-50 p-4">
+                        <div className="text-xs font-semibold tracking-[0.14em] text-zinc-500">
                           HOW TO USE
                         </div>
-                        <div className="mt-2 text-sm font-semibold text-zinc-100">
+                        <div className="mt-2 text-sm font-semibold text-zinc-900">
                           {usage.whatItDoes}
                         </div>
-                        <div className="mt-3 space-y-2 text-xs text-zinc-300/90">
-                          <div className="text-[11px] font-semibold text-zinc-300">
+                        <div className="mt-3 space-y-2 text-xs text-zinc-600">
+                          <div className="text-[11px] font-semibold text-zinc-700">
                             Example inputs
                           </div>
                           <ul className="list-disc space-y-1 pl-4">
@@ -292,14 +292,14 @@ export default function DashboardPage() {
                           <button
                             type="button"
                             onClick={() => openRunModal(agent)}
-                            className="inline-flex items-center justify-center rounded-2xl bg-zinc-50 px-4 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_0_1px_rgba(255,255,255,0.25)] transition-colors hover:bg-white"
+                            className="inline-flex items-center justify-center rounded-2xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800"
                           >
                             Run Agent
                           </button>
                           <button
                             type="button"
                             onClick={() => removeAgent(agent.id)}
-                            className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-zinc-100 transition-colors hover:bg-white/10"
+                            className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 shadow-sm transition-colors hover:bg-zinc-50"
                           >
                             Remove Agent
                           </button>
@@ -307,7 +307,7 @@ export default function DashboardPage() {
 
                         <div
                           className={[
-                            "mt-4 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/40 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] transition-all duration-300",
+                            "mt-4 overflow-hidden rounded-2xl border border-black/10 bg-white transition-all duration-300",
                             result.status === "success" || result.status === "error"
                               ? "max-h-[520px] opacity-100 translate-y-0 p-4"
                               : "max-h-0 opacity-0 -translate-y-1 p-0 border-transparent",
@@ -315,15 +315,15 @@ export default function DashboardPage() {
                           aria-live="polite"
                         >
                           {result.status === "error" ? (
-                            <div className="text-sm leading-6 text-rose-200 whitespace-pre-wrap">
+                            <div className="text-sm leading-6 text-rose-700 whitespace-pre-wrap">
                               {result.message}
                             </div>
                           ) : result.status === "success" ? (
-                            <div className="text-sm leading-7 text-zinc-100 whitespace-pre-wrap [text-wrap:pretty]">
+                            <div className="text-sm leading-7 text-zinc-900 whitespace-pre-wrap [text-wrap:pretty]">
                               {result.text}
                             </div>
                           ) : (
-                            <div className="text-sm text-zinc-300">Loading…</div>
+                            <div className="text-sm text-zinc-600">Loading…</div>
                           )}
                         </div>
                       </div>

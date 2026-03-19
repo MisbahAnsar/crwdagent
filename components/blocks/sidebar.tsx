@@ -122,7 +122,7 @@ export function Sidebar({
         ) : null}
         <div
           className={cn(
-            "fixed inset-y-0 left-0 z-50 w-72 border-r border-white/10 bg-zinc-950/90 backdrop-blur transition-transform duration-200",
+            "fixed inset-y-0 left-0 z-50 w-72 border-r border-black/10 bg-white/90 backdrop-blur transition-transform duration-200",
             mobileOpen ? "translate-x-0" : "-translate-x-full",
             className,
           )}
@@ -135,7 +135,7 @@ export function Sidebar({
 
   if (collapsible === "none") {
     return (
-      <div className={cn("h-svh w-64 border-r border-white/10", className)}>
+      <div className={cn("h-svh w-64 border-r border-black/10 bg-white", className)}>
         <div className="flex h-full flex-col">{children}</div>
       </div>
     );
@@ -165,8 +165,8 @@ export function Sidebar({
           className={cn(
             "flex h-full w-full flex-col overflow-hidden",
             variant === "float"
-              ? "rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_18px_70px_rgba(0,0,0,0.35)] backdrop-blur"
-              : "border-r border-white/10 bg-white/[0.04] backdrop-blur",
+              ? "rounded-2xl border border-black/10 bg-white shadow-[0_18px_70px_rgba(0,0,0,0.12)]"
+              : "border-r border-black/10 bg-white",
           )}
         >
           {children}
@@ -232,7 +232,7 @@ export function SidebarMenuButton({
 }: React.ComponentProps<"button">) {
   const { state } = useSidebar();
   const base =
-    "flex w-full items-center gap-2 overflow-hidden rounded-xl p-2 text-left text-sm text-zinc-200 transition-colors hover:bg-white/10 hover:text-zinc-50";
+    "flex w-full items-center gap-2 overflow-hidden rounded-xl p-2 text-left text-sm text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900";
   const collapsed = state === "collapsed";
 
   return (
@@ -252,6 +252,6 @@ export function SidebarMenuButton({
 }
 
 export function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("border-t border-white/10 p-2", className)} {...props} />;
+  return <div className={cn("border-t border-black/10 p-2", className)} {...props} />;
 }
 

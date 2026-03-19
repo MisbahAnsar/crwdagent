@@ -67,7 +67,7 @@ export function AppSidebar({
                     onClick={() => onActiveChange(item.key)}
                     className={
                       active === item.key
-                        ? "bg-white/10 text-zinc-50 hover:bg-white/10"
+                        ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-100"
                         : undefined
                     }
                   >

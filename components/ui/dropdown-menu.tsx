@@ -57,16 +57,23 @@ export function DropdownMenuTrigger({
 }) {
   const { open, setOpen, triggerRef } = useDropdown();
   return (
-    <button
+    <div
       ref={(n) => {
         triggerRef.current = n;
       }}
-      type="button"
       className="w-full"
+      role="button"
+      tabIndex={0}
       onClick={() => setOpen(!open)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setOpen(!open);
+        }
+      }}
     >
       {children}
-    </button>
+    </div>
   );
 }
 
@@ -91,7 +98,7 @@ export function DropdownMenuContent({
     <div
       ref={contentRef}
       className={[
-        "absolute z-50 min-w-48 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/95 shadow-[0_18px_70px_rgba(0,0,0,0.70)] backdrop-blur",
+        "absolute z-50 min-w-48 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_18px_70px_rgba(0,0,0,0.12)]",
         sideCls,
         alignCls,
         className,
@@ -114,7 +121,7 @@ export function DropdownMenuItem({
   return (
     <button
       type="button"
-      className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm text-zinc-200 transition-colors hover:bg-white/10 hover:text-zinc-50"
+      className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm text-zinc-800 transition-colors hover:bg-zinc-100 hover:text-zinc-950"
       onClick={() => {
         onSelect?.();
         setOpen(false);
