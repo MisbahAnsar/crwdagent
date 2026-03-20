@@ -1,12 +1,14 @@
 export default function Hero() {
   return (
-    <section className="relative z-10 w-full min-h-[90vh] overflow-hidden bg-[#f4f7ff] pb-40 pt-32 flex items-center justify-center">
+    <section
+      className="relative z-10 w-[100vw] ml-[calc(50%-50vw)] -mt-14 sm:-mt-16 min-h-screen overflow-hidden bg-[#f4f7ff] pb-40 pt-32 flex items-center justify-center"
+    >
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle, #000 1.5px, transparent 1.5px)",
-          backgroundSize: "16px 16px",
+            "radial-gradient(circle, rgba(0,0,0,0.12) 1.5px, transparent 1.5px)",
+          backgroundSize: "20px 20px",
         }}
       />
 

@@ -66,6 +66,7 @@ function getUsage(agent: Agent) {
   }
 }
 
+
 export default function DashboardPage() {
   const [active, setActive] = useState<NavKey>("my");
 
@@ -119,15 +120,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-zinc-50 text-zinc-950">
-      <div className="pointer-events-none absolute inset-0 opacity-70">
-        <div className="absolute -left-24 -top-28 h-[32rem] w-[32rem] rounded-full bg-fuchsia-400/20 blur-3xl" />
-        <div className="absolute -right-24 top-24 h-[34rem] w-[34rem] rounded-full bg-cyan-300/25 blur-3xl" />
-      </div>
-      <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,theme(colors.zinc.950)_1px,transparent_0)] [background-size:18px_18px]" />
+    <div className="relative min-h-screen bg-zinc-50 text-zinc-950">
       <SidebarProvider>
         <AppSidebar active={active} onActiveChange={setActive} />
-        <SidebarInset className="relative px-4 py-6 sm:px-6 sm:py-10">
+        <SidebarInset className="relative p-2">
+          {/* Right-side bordered panel — independent from the sidebar */}
+          <div className="min-h-full rounded-2xl bg-white border border-black/10 px-4 py-6 sm:px-6 sm:py-10">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
           <header className="flex items-start justify-between gap-4">
             <div className="min-w-0">
@@ -333,6 +331,7 @@ export default function DashboardPage() {
               })}
             </div>
           )}
+          </div>
           </div>
         </SidebarInset>
       </SidebarProvider>
