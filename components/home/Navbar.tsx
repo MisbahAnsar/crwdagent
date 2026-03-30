@@ -1,8 +1,9 @@
- "use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { Wallet } from "lucide-react";
 import Link from "next/link";
+import { CreditsBadge } from "@/components/CreditsBadge";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,6 +69,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
+            <CreditsBadge />
             <button
               type="button"
               disabled

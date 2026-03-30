@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { CreditsBadge } from "../../components/CreditsBadge";
 import { AGENTS, type Agent } from "../../lib/agents";
+import {
+  getCreatorEarnings,
+  getRuns,
+} from "../../lib/runs";
 
 const STORAGE_KEY = "crwdagent:adddedAgents:v1";
 
@@ -34,6 +39,7 @@ export default function MarketplacePage() {
   }, [toast]);
 
   const addedSet = useMemo(() => new Set(addedIds), [addedIds]);
+  const runsByAgent = useMemo(() => getRuns(), []);
 
   function addAgent(agent: Agent) {
     setAddedIds((prev) => {
@@ -72,6 +78,7 @@ export default function MarketplacePage() {
           </div>
 
           <div className="flex flex-col gap-3 sm:items-end">
+            <CreditsBadge />
             <a
               href="/dashboard"
               className="inline-flex h-11 items-center justify-center rounded-full bg-zinc-900 px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800"
@@ -110,6 +117,9 @@ export default function MarketplacePage() {
                         <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
                           {agent.name}
                         </h2>
+                        <p className="mt-1 text-xs text-zinc-500">
+                          by {agent.creator}
+                        </p>
                         <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-600">
                           {agent.description}
                         </p>
@@ -123,6 +133,19 @@ export default function MarketplacePage() {
                           pay‑per‑use
                         </div>
                       </div>
+                    </div>
+
+                    <div className="mt-3 flex gap-4 text-xs text-zinc-600">
+                      <span suppressHydrationWarning>
+                        Runs: {(runsByAgent[agent.id] ?? 0)}
+                      </span>
+                      <span suppressHydrationWarning>
+                        Earnings: $
+                        {getCreatorEarnings(
+                          runsByAgent[agent.id] ?? 0,
+                          agent.priceAmount,
+                        ).toFixed(2)}
+                      </span>
                     </div>
 
                     <div className="mt-5 flex items-center justify-between gap-3">

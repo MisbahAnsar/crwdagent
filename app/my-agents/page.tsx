@@ -2,7 +2,13 @@
 
 import { useMemo, useState } from "react";
 import AgentRunModal from "../../components/AgentRunModal";
+import { CreditsBadge } from "../../components/CreditsBadge";
 import { getAgentById, type Agent } from "../../lib/agents";
+import {
+  getCreatorEarnings,
+  getRuns,
+  incrementRun,
+} from "../../lib/runs";
 
 const STORAGE_KEY = "crwdagent:adddedAgents:v1";
 
@@ -76,6 +82,13 @@ export default function MyAgentsPage() {
     if (typeof window === "undefined") return [];
     return safeParseIds(localStorage.getItem(STORAGE_KEY));
   });
+  const [runsVersion, setRunsVersion] = useState(0);
+
+  const runsByAgent = useMemo(
+    () => getRuns(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- runsVersion triggers refresh from localStorage
+    [runsVersion],
+  );
 
   const agents = useMemo(() => {
     const resolved: Agent[] = [];
@@ -90,6 +103,7 @@ export default function MyAgentsPage() {
   const [resultById, setResultById] = useState<Record<string, RunState>>({});
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalKey, setModalKey] = useState(0);
   const [activeAgentId, setActiveAgentId] = useState<string | null>(null);
   const [modalPrompt, setModalPrompt] = useState("");
 
@@ -104,6 +118,7 @@ export default function MyAgentsPage() {
   function openRunModal(agent: Agent) {
     setActiveAgentId(agent.id);
     setModalPrompt(promptById[agent.id] ?? "");
+    setModalKey((k) => k + 1);
     setModalOpen(true);
   }
 
@@ -134,14 +149,17 @@ export default function MyAgentsPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-600 shadow-sm">
-            <span
-              className="font-semibold text-zinc-900"
-              suppressHydrationWarning
-            >
-              {agents.length}
-            </span>{" "}
-            agents
+          <div className="flex items-center gap-2">
+            <CreditsBadge />
+            <div className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-zinc-600 shadow-sm">
+              <span
+                className="font-semibold text-zinc-900"
+                suppressHydrationWarning
+              >
+                {agents.length}
+              </span>{" "}
+              agents
+            </div>
           </div>
         </header>
 
@@ -183,6 +201,9 @@ export default function MyAgentsPage() {
                           <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
                             {agent.name}
                           </h2>
+                          <p className="mt-1 text-xs text-zinc-500">
+                            by {agent.creator}
+                          </p>
                           <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-600">
                             {agent.description}
                           </p>
@@ -195,6 +216,19 @@ export default function MyAgentsPage() {
                             pay‑per‑use
                           </div>
                         </div>
+                      </div>
+
+                      <div className="mt-3 flex gap-4 text-xs text-zinc-600">
+                        <span suppressHydrationWarning>
+                          Runs: {(runsByAgent[agent.id] ?? 0)}
+                        </span>
+                        <span suppressHydrationWarning>
+                          Earnings: $
+                          {getCreatorEarnings(
+                            runsByAgent[agent.id] ?? 0,
+                            agent.priceAmount,
+                          ).toFixed(2)}
+                        </span>
                       </div>
 
                       <div className="mt-5 rounded-2xl border border-black/10 bg-zinc-50 p-4">
@@ -267,6 +301,7 @@ export default function MyAgentsPage() {
       </div>
 
       <AgentRunModal
+        key={modalKey}
         open={modalOpen}
         agent={activeAgentId ? getAgentById(activeAgentId) ?? null : null}
         endpoint={activeAgentId ? `/api/agents/${activeAgentId}` : null}
@@ -280,6 +315,10 @@ export default function MyAgentsPage() {
         onCompleted={(next) => {
           if (!activeAgentId) return;
           if (next.status === "idle" || next.status === "loading") return;
+          if (next.status === "success") {
+            incrementRun(activeAgentId);
+            setRunsVersion((v) => v + 1);
+          }
           setResultById((prev) => ({ ...prev, [activeAgentId]: next }));
         }}
       />

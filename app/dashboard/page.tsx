@@ -4,7 +4,13 @@ import { useMemo, useState } from "react";
 import { AppSidebar } from "@/components/blocks/whatsapp-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/blocks/sidebar";
 import AgentRunModal from "../../components/AgentRunModal";
+import { CreditsBadge } from "../../components/CreditsBadge";
 import { AGENTS, getAgentById, type Agent } from "../../lib/agents";
+import {
+  getCreatorEarnings,
+  getRuns,
+  incrementRun,
+} from "../../lib/runs";
 
 const STORAGE_KEY = "crwdagent:adddedAgents:v1";
 
@@ -87,9 +93,17 @@ export default function DashboardPage() {
 
   const [promptById, setPromptById] = useState<Record<string, string>>({});
   const [resultById, setResultById] = useState<Record<string, RunState>>({});
+  const [runsVersion, setRunsVersion] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalKey, setModalKey] = useState(0);
   const [activeAgentId, setActiveAgentId] = useState<string | null>(null);
   const [modalPrompt, setModalPrompt] = useState("");
+
+  const runsByAgent = useMemo(
+    () => getRuns(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- runsVersion triggers refresh from localStorage
+    [runsVersion],
+  );
 
   function addAgent(agent: Agent) {
     setAddedIds((prev) => {
@@ -111,6 +125,7 @@ export default function DashboardPage() {
   function openRunModal(agent: Agent) {
     setActiveAgentId(agent.id);
     setModalPrompt(promptById[agent.id] ?? "");
+    setModalKey((k) => k + 1);
     setModalOpen(true);
   }
 
@@ -143,6 +158,7 @@ export default function DashboardPage() {
             </div>
 
             <div className="flex items-center gap-2">
+              <CreditsBadge />
               <button
                 type="button"
                 className="hidden rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 shadow-sm transition-colors hover:bg-zinc-50 sm:inline-flex"
@@ -183,6 +199,9 @@ export default function DashboardPage() {
                           <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
                             {agent.name}
                           </h2>
+                          <p className="mt-1 text-xs text-zinc-500">
+                            by {agent.creator}
+                          </p>
                           <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-600">
                             {agent.description}
                           </p>
@@ -195,6 +214,19 @@ export default function DashboardPage() {
                             pay‑per‑use
                           </div>
                         </div>
+                      </div>
+
+                      <div className="mt-3 flex gap-4 text-xs text-zinc-600">
+                        <span suppressHydrationWarning>
+                          Runs: {(runsByAgent[agent.id] ?? 0)}
+                        </span>
+                        <span suppressHydrationWarning>
+                          Earnings: $
+                          {getCreatorEarnings(
+                            runsByAgent[agent.id] ?? 0,
+                            agent.priceAmount,
+                          ).toFixed(2)}
+                        </span>
                       </div>
 
                       <div className="mt-auto pt-5">
@@ -252,6 +284,9 @@ export default function DashboardPage() {
                           <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
                             {agent.name}
                           </h2>
+                          <p className="mt-1 text-xs text-zinc-500">
+                            by {agent.creator}
+                          </p>
                           <p className="mt-2 line-clamp-3 text-sm leading-6 text-zinc-600">
                             {agent.description}
                           </p>
@@ -264,6 +299,19 @@ export default function DashboardPage() {
                             pay‑per‑use
                           </div>
                         </div>
+                      </div>
+
+                      <div className="mt-3 flex gap-4 text-xs text-zinc-600">
+                        <span suppressHydrationWarning>
+                          Runs: {(runsByAgent[agent.id] ?? 0)}
+                        </span>
+                        <span suppressHydrationWarning>
+                          Earnings: $
+                          {getCreatorEarnings(
+                            runsByAgent[agent.id] ?? 0,
+                            agent.priceAmount,
+                          ).toFixed(2)}
+                        </span>
                       </div>
 
                       <div className="mt-5 rounded-2xl border border-black/10 bg-zinc-50 p-4">
@@ -337,6 +385,7 @@ export default function DashboardPage() {
       </SidebarProvider>
 
       <AgentRunModal
+        key={modalKey}
         open={modalOpen}
         agent={activeAgentId ? getAgentById(activeAgentId) ?? null : null}
         endpoint={activeAgentId ? `/api/agents/${activeAgentId}` : null}
@@ -350,6 +399,10 @@ export default function DashboardPage() {
         onCompleted={(next) => {
           if (!activeAgentId) return;
           if (next.status === "idle" || next.status === "loading") return;
+          if (next.status === "success") {
+            incrementRun(activeAgentId);
+            setRunsVersion((v) => v + 1);
+          }
           setResultById((prev) => ({ ...prev, [activeAgentId]: next }));
         }}
       />
